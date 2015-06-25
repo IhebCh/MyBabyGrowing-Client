@@ -1,25 +1,17 @@
 package com.itech.mybabygrowing;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.itech.adapter.MyPagerAdapter;
-
-import it.neokree.materialtabs.MaterialTab;
-import it.neokree.materialtabs.MaterialTabHost;
-import it.neokree.materialtabs.MaterialTabListener;
-
-public class MainActivity extends ActionBarActivity implements MaterialTabListener {
+public class MainActivity extends ActionBarActivity {
 
 
     private Toolbar toolbar;
-    private ViewPager viewPager;
-    private MaterialTabHost materialTabHost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,32 +34,6 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
 
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
-        viewPager = (ViewPager) findViewById(R.id.pager);
-
-        materialTabHost = (MaterialTabHost) findViewById(R.id.tabs);
-
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), this) ;
-
-        viewPager.setAdapter(myPagerAdapter);
-
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-
-            @Override
-            public void onPageSelected(int position) {
-                materialTabHost.setSelectedNavigationItem(position);
-            }
-
-
-        });
-
-        for (int i = 0; i < myPagerAdapter.getCount(); i++) {
-            materialTabHost.addTab(
-                    materialTabHost.newTab()
-                            .setIcon(getResources().getDrawable(R.drawable.guide_icon_info_grey))
-                            .setTabListener(this)
-            );
-        }
 
 
         /*materialTabHost.setDistributeEvenly(true);
@@ -114,18 +80,5 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     }
 
 
-    @Override
-    public void onTabSelected(MaterialTab materialTab) {
-        viewPager.setCurrentItem(materialTab.getPosition());
-    }
 
-    @Override
-    public void onTabReselected(MaterialTab materialTab) {
-
-    }
-
-    @Override
-    public void onTabUnselected(MaterialTab materialTab) {
-
-    }
 }

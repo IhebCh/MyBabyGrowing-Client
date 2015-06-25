@@ -17,11 +17,11 @@ import com.itech.mybabygrowing.R;
  * Created by oSunshine on 24/06/2015.
  */
 
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class MePagerAdapter extends FragmentPagerAdapter {
 
     private final Context context;
 
-    public MyPagerAdapter(FragmentManager fm, Context context) {
+    public MePagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }

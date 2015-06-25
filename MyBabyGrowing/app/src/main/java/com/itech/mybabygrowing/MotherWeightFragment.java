@@ -11,12 +11,9 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.XLabels;
-import com.github.mikephil.charting.utils.YLabels;
 
 import java.util.ArrayList;
 
@@ -40,7 +37,7 @@ public class MotherWeightFragment extends Fragment {
     private String mParam2;
 
 
-    private LineChart mChart;
+    //private LineChart mChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
 
@@ -80,7 +77,7 @@ public class MotherWeightFragment extends Fragment {
         LineData data = new LineData(xVals, dataSets);
 
         // set data
-        mChart.setData(data);
+  //      mChart.setData(data);
     }
     /**
      * Use this factory method to create a new instance of
@@ -122,7 +119,7 @@ public class MotherWeightFragment extends Fragment {
          /*
                ************ Chart ***************
          */
-        mChart = (LineChart) view.findViewById(R.id.chart1);
+   /*     mChart = (LineChart) view.findViewById(R.id.chart1);
         // if enabled, the chart will always start at zero on the y-axis
         mChart.setStartAtZero(true);
 
@@ -166,7 +163,7 @@ public class MotherWeightFragment extends Fragment {
 
         setData(36, 100);
         mChart.animateXY(2000, 2000);
-
+*/
 
         return  view ;
 

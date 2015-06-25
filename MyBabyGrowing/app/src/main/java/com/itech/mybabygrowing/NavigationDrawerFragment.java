@@ -192,7 +192,7 @@ public class NavigationDrawerFragment extends Fragment {
                     break;
                 case 2:
                     ((ImageView) (listView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.me_selected_btn);
-
+                    displayView(position);
                     break;
                 case 3:
                     ((ImageView) (listView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.more_selected_btn);
@@ -208,5 +208,11 @@ public class NavigationDrawerFragment extends Fragment {
 
 
         }
+    }
+
+    private void displayView(int position) {
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frame_container, MeFragment.newInstance("","")).commit();
     }
 }
