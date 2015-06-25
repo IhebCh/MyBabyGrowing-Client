@@ -1,16 +1,19 @@
 package com.itech.mybabygrowing;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 
     private Toolbar toolbar;
+    private MeFragment meFragment = null;
 
 
     @Override
@@ -33,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+
 
 
 
@@ -77,6 +81,22 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        // update the main content by replacing fragments
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (meFragment == null) meFragment = new MeFragment();
+
+        switch (position) {
+            case 2:
+                Log.v("Fragment", position + "  --  " + fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, meFragment)
+                        .commit());
+                break;
+        }
     }
 
 

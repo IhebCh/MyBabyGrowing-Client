@@ -1,7 +1,6 @@
 package com.itech.mybabygrowing;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,7 +17,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MeFragment.OnFragmentInteractionListener} interface
+
  * to handle interaction events.
  * Use the {@link MeFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -130,10 +129,6 @@ public class MeFragment extends Fragment implements MaterialTabListener {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
 
 
     @Override

@@ -1,6 +1,7 @@
 package com.itech.mybabygrowing;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -41,6 +42,9 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView listView;
     private View containerView;
     private int recyclerViewSelectedItem;
+    private NavigationDrawerCallbacks mCallbacks;
+    private int mCurrentSelectedPosition;
+
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -83,6 +87,10 @@ public class NavigationDrawerFragment extends Fragment {
         if (savedInstanceState != null) {
             mFromSavedInstance = true;
         }
+
+
+        selectItem(mCurrentSelectedPosition);
+
     }
 
     @Override
@@ -90,6 +98,7 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
         listView = (ListView) layout.findViewById(R.id.drawerList);
             // Inflate the layout for this fragment
         drawerListViewItemAdapter = new DrawerListViewItemAdapter(getActivity(), getData());
@@ -192,16 +201,19 @@ public class NavigationDrawerFragment extends Fragment {
                     break;
                 case 2:
                     ((ImageView) (listView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.me_selected_btn);
-                    displayView(position);
+
                     break;
                 case 3:
                     ((ImageView) (listView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.more_selected_btn);
 
                     break;
 
+
             }
+
+            selectItem(position);
 //                listView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(Color.TRANSPARENT);
-            listView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text);
+            //listView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text);
 
 
             //              listView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(Color.CYAN);
@@ -210,9 +222,46 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
-    private void displayView(int position) {
+  /*  private void displayView(int position) {
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.frame_container, MeFragment.newInstance("","")).commit();
+
+    }
+*/
+    public static interface NavigationDrawerCallbacks {
+        /**
+         * Called when an item in the navigation drawer is selected.
+         */
+        void onNavigationDrawerItemSelected(int position);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallbacks = (NavigationDrawerCallbacks) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    private void selectItem (int position) {
+        mCurrentSelectedPosition = position;
+        if (listView != null) {
+            listView.setItemChecked(position, true);
+        }
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(containerView);
+        }
+        if (mCallbacks != null) {
+            mCallbacks.onNavigationDrawerItemSelected(position);
+        }
     }
 }
