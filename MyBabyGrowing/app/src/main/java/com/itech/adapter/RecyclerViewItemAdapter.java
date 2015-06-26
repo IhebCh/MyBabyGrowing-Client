@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.itech.com.itech.models.DrawerListViewItem;
+import com.itech.models.DrawerListViewItem;
 import com.itech.mybabygrowing.R;
 
 import java.util.Collections;

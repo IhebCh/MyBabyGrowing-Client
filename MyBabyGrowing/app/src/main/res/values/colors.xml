@@ -12,5 +12,8 @@
     <color name="pop_up_color" >#F06292</color>
     <color name="background_color" >#ffeef0eb</color>
     <color name="navigation_background_color" >#FFFFFF</color>
+	
+	 <color name="psts_background_tab_pressed">#1AFFFFFF</color>
+    <color name="psts_background_tab_pressed_ripple">#AAFFFFFF</color>
 
 </resources>

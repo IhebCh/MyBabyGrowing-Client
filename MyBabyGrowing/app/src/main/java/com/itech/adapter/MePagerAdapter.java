@@ -1,25 +1,22 @@
 package com.itech.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 
 import com.itech.mybabygrowing.MotherGuideFragment;
 import com.itech.mybabygrowing.MotherWeightFragment;
 import com.itech.mybabygrowing.R;
+import com.itech.tab.PagerSlidingTabStrip;
 
 /**
  * Created by oSunshine on 24/06/2015.
  */
 
-public class MePagerAdapter extends FragmentPagerAdapter {
+public class MePagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
 
-    private final Context context;
+    private Context context;
 
     public MePagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -46,7 +43,7 @@ public class MePagerAdapter extends FragmentPagerAdapter {
         return 2;
     }
 
-    @Override
+   /*@Override
     public CharSequence getPageTitle(int position) {
         Drawable drawable = context.getResources().getDrawable(R.drawable.guide_icon_info_grey);
         drawable.setBounds(0,0,36,36);
@@ -55,5 +52,17 @@ public class MePagerAdapter extends FragmentPagerAdapter {
         spannableString.setSpan(imageSpan, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return spannableString;
+    }
+*/
+
+    /*@Override
+    public CharSequence getPageTitle(int position) {
+
+        return " Tab   " + position;
+    }
+*/
+    @Override
+    public int getPageIconResId(int position) {
+        return R.drawable.guide_icon_info_grey;
     }
 }

@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itech.adapter.DrawerListViewItemAdapter;
-import com.itech.com.itech.models.DrawerListViewItem;
+import com.itech.models.DrawerListViewItem;
 
 import java.util.ArrayList;
 import java.util.List;

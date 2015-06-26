@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itech.adapter.RecyclerViewItemAdapter;
-import com.itech.com.itech.models.DrawerListViewItem;
+import com.itech.models.DrawerListViewItem;
 
 import java.util.ArrayList;
 import java.util.List;

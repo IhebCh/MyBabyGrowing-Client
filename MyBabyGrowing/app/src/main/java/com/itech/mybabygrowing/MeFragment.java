@@ -9,31 +9,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.itech.adapter.MePagerAdapter;
+import com.itech.tab.PagerSlidingTabStrip;
 
-import it.neokree.materialtabs.MaterialTab;
-import it.neokree.materialtabs.MaterialTabHost;
-import it.neokree.materialtabs.MaterialTabListener;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
-
+ * <p/>
  * to handle interaction events.
  * Use the {@link MeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MeFragment extends Fragment implements MaterialTabListener {
+public class MeFragment extends Fragment   {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private ViewPager viewPager;
-    private MaterialTabHost materialTabHost;
+    private PagerSlidingTabStrip pagerSlidingTabStrip;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private MePagerAdapter mePagerAdapter;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -72,51 +71,63 @@ public class MeFragment extends Fragment implements MaterialTabListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_me, container, false);
+        View view = inflater.inflate(R.layout.fragment_me, container, false);
         // Inflate the layout for this fragment
+
+        pagerSlidingTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
+
         viewPager = (ViewPager) view.findViewById(R.id.pager);
 
-        materialTabHost = (MaterialTabHost)  view.findViewById(R.id.tabs);
-
-        MePagerAdapter mePagerAdapter = new MePagerAdapter(getActivity().getSupportFragmentManager(), getActivity()) ;
+        mePagerAdapter = new MePagerAdapter(getChildFragmentManager(), getActivity());
 
         viewPager.setAdapter(mePagerAdapter);
 
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        pagerSlidingTabStrip.setViewPager(viewPager);
 
+        pagerSlidingTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
 
             @Override
             public void onPageSelected(int position) {
-                materialTabHost.setSelectedNavigationItem(position);
+
             }
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        /*viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                //    pagerSlidingTabStrip.update
+                //    pagerSlidingTabStrip.setSelectedNavigationItem(position);
+            }
         });
 
-        for (int i = 0; i < mePagerAdapter.getCount(); i++) {
-            materialTabHost.addTab(
-                    materialTabHost.newTab()
-                            .setIcon(getResources().getDrawable(R.drawable.guide_icon_info_grey))
+       /* for (int i = 0; i < mePagerAdapter.getCount(); i++) {
+            pagerSlidingTabStrip.addTab(
+                    pagerSlidingTabStrip.newTab()
+                            .setIcon(getResources().getDrawable(R.drawable.baby_btn))
                             .setTabListener(this)
             );
-        }
+        }*/
 
         return view;
     }
 
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
     /**
@@ -131,19 +142,7 @@ public class MeFragment extends Fragment implements MaterialTabListener {
      */
 
 
-    @Override
-    public void onTabSelected(MaterialTab materialTab) {
-        viewPager.setCurrentItem(materialTab.getPosition());
-    }
 
-    @Override
-    public void onTabReselected(MaterialTab materialTab) {
 
-    }
-
-    @Override
-    public void onTabUnselected(MaterialTab materialTab) {
-
-    }
 
 }

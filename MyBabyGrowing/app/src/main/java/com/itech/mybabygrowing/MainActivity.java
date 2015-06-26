@@ -38,16 +38,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
 
-
-
-        /*materialTabHost.setDistributeEvenly(true);
-
-        materialTabHost.setCustomTabView(R.layout.custom_tab_view, R.id.tabsText);
-        materialTabHost.setBackgroundColor(getResources().getColor(R.color.primary_color));
-        materialTabHost.setSelectedIndicatorColors(getResources().getColor(R.color.accent_color));
-
-        materialTabHost.setViewPager(viewPager);
-*/
         ///*set image icon floating*/
       /* ImageView icon = new ImageView(this);
         icon.setImageDrawable(getResources().getDrawable(R.drawable.heart));
@@ -88,13 +78,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if (meFragment == null) meFragment = new MeFragment();
+         meFragment = new MeFragment();
 
         switch (position) {
             case 2:
                 Log.v("Fragment", position + "  --  " + fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, meFragment)
                         .commit());
+
                 break;
         }
     }
