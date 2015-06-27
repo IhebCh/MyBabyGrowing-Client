@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/primary_color_text_big"
     android:orientation="vertical"
     tools:context="com.itech.mybabygrowing.MeFragment">
 
@@ -11,20 +12,19 @@
     <com.itech.tab.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        app:pstsShouldExpand="true"
+        android:layout_height="40dp"
+        android:background="?attr/colorPrimary"
+
         app:pstsIndicatorColor="@color/accent_color"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        app:pstsShouldExpand="true" />
 
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
-        android:background="#FF0"
         android:layout_weight="1">
-
 
 
     </android.support.v4.view.ViewPager>

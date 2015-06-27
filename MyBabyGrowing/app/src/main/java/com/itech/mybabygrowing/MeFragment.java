@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class MeFragment extends Fragment   {
     private String mParam1;
     private String mParam2;
     private MePagerAdapter mePagerAdapter;
+    private Activity activity;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -92,6 +94,7 @@ public class MeFragment extends Fragment   {
 
             @Override
             public void onPageSelected(int position) {
+                ((ActionBarActivity)activity).getSupportActionBar().setSubtitle(mePagerAdapter.changeSubtitle(position));
 
             }
 
@@ -115,6 +118,7 @@ public class MeFragment extends Fragment   {
                             .setTabListener(this)
             );
         }*/
+        ((ActionBarActivity)activity).getSupportActionBar().setSubtitle(mePagerAdapter.changeSubtitle(0));
 
         return view;
     }
@@ -122,6 +126,11 @@ public class MeFragment extends Fragment   {
 
     @Override
     public void onAttach(Activity activity) {
+
+
+        this.activity=activity ;
+        ((ActionBarActivity)activity).getSupportActionBar().setTitle("Moi");
+
         super.onAttach(activity);
     }
 
@@ -141,8 +150,9 @@ public class MeFragment extends Fragment   {
      * >Communicating with Other Fragments</a> for more information.
      */
 
+    public interface TabChangeTitleListener{
 
-
-
+        public String changeSubtitle(int position);
+    }
 
 }

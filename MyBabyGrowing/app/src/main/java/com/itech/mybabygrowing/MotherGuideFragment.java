@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +47,8 @@ public class MotherGuideFragment extends Fragment {
 
         List<DrawerListViewItem> list = new ArrayList<>();
         DrawerListViewItem drawerListViewItem;
-        int[] iconTableau = {R.drawable.today_selected_btn, R.drawable.baby_btn, R.drawable.me_btn, R.drawable.more_btn};
-        String[] textTableau = {"Aujourdhui", "Mon enfant", "Moi", "Plus"};
+        int[] iconTableau = {R.drawable.guide_food, R.drawable.guide_exercise, R.drawable.guide_medical, R.drawable.guide_labour};
+        String[] textTableau = {"Nutrition", "Exercice", "Medical", "Plus"};
         for (int i = 0; i < iconTableau.length; i++) {
             drawerListViewItem = new DrawerListViewItem();
             drawerListViewItem.setTitle(textTableau[i]);
@@ -109,7 +108,7 @@ public class MotherGuideFragment extends Fragment {
                 ((TextView) recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text)).setTextColor(getResources().getColor(R.color.primary_color_text));
                 recyclerView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(Color.TRANSPARENT);
 
-                switch (recyclerViewSelectedItem) {
+            /*    switch (recyclerViewSelectedItem) {
                     case 0:
                         ((ImageView) (recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.today_btn);
                         break;
@@ -126,14 +125,14 @@ public class MotherGuideFragment extends Fragment {
 
                         break;
 
-                }
+                }*/
 
                   /*  select current item and highlight */
                 recyclerViewSelectedItem = position;
                 ((TextView) recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text)).setTextColor(getResources().getColor(R.color.primary_color_text_big));
                 recyclerView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(getResources().getColor(R.color.primary_color_light));
 
-                switch (recyclerViewSelectedItem) {
+           /*     switch (recyclerViewSelectedItem) {
                     case 0:
                         ((ImageView) (recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.today_selected_btn);
                         break;
@@ -150,7 +149,7 @@ public class MotherGuideFragment extends Fragment {
 
                         break;
 
-                }
+                }*/
 //                recyclerView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(Color.TRANSPARENT);
                 recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text);
 

@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -258,6 +257,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         View tabView;
         for (int i = 0; i < mTabCount; i++) {
             if (mPager.getAdapter() instanceof IconTabProvider) {
+
                 addIconTab(i, ((IconTabProvider) mPager.getAdapter()).getPageIconResId(i));
             } else {
                 addTextTab(i, mPager.getAdapter().getPageTitle(i).toString());
@@ -321,9 +321,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     private void addIconTab(final int position, int resId) {
 
-        ImageButton tab = new ImageButton(getContext());
+        ImageView tab = new ImageView(getContext());
         tab.setBackgroundDrawable(null);
         tab.setImageResource(resId);
+
+        tab.setPadding(0,10,0,10);
 
         addTab(position, tab);
 

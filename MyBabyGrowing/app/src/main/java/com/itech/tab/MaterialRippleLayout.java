@@ -41,8 +41,8 @@ public class MaterialRippleLayout extends FrameLayout {
 
     private static final String TAG = MaterialRippleLayout.class.getSimpleName();
 
-    public static final int DEFAULT_DURATION = 250;
-    public static final int DEFAULT_FADE_DURATION = 125;
+    public static final int DEFAULT_DURATION = 450;
+    public static final int DEFAULT_FADE_DURATION = 225;
     public static final float DEFAULT_DIAMETER_DP = 20;
     public static final float DEFAULT_ALPHA = 0.2f;
     public static final int DEFAULT_COLOR = Color.WHITE;

@@ -133,7 +133,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                toolbar.setAlpha(1 - (float) (slideOffset * 0.7));
+        //        toolbar.setAlpha(1 - (float) (slideOffset * 0.7));
             }
         };
 
