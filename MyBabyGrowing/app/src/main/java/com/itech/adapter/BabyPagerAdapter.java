@@ -5,30 +5,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.itech.mybabygrowing.AppointementsFragment;
-import com.itech.mybabygrowing.MeFragment;
-import com.itech.mybabygrowing.MotherGuideFragment;
-import com.itech.mybabygrowing.MotherWeightFragment;
+import com.itech.mybabygrowing.BabyEvolutionFragment;
+import com.itech.mybabygrowing.BabyFragment;
+import com.itech.mybabygrowing.BabyNamesFragment;
 import com.itech.mybabygrowing.R;
-import com.itech.mybabygrowing.ToDoFragment;
 import com.itech.tab.PagerSlidingTabStrip;
 
 /**
- * Created by oSunshine on 24/06/2015.
+ * Created by oSunshine on 27/06/2015.
  */
-
-public class MePagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider, MeFragment.TabChangeTitleListener {
+public class BabyPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider, BabyFragment.TabChangeTitleListener {
 
     private Context context;
-    private int[] iconsId = {R.drawable.guide_icon, R.drawable.myweight_icon, R.drawable.appointment_icon, R.drawable.todo_icon};
-    private String[] titres = {"Guide", "Poids", "Rendez vous", "Tâches à faire"};
+    private int[] iconsId = {R.drawable.babynames_icon_new, R.drawable.weekly_icon};
+    private String[] titres = {"Nom de bébé", "Evolution du bébé"};
 
-    MotherGuideFragment motherGuideFragment = new MotherGuideFragment();
-    MotherWeightFragment motherWeightFragment = new MotherWeightFragment();
-    AppointementsFragment appointementsFragment = new AppointementsFragment();
-    ToDoFragment toDoFragment = new ToDoFragment();
-
-    public MePagerAdapter(FragmentManager fm, Context context) {
+    public BabyPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
@@ -38,14 +30,11 @@ public class MePagerAdapter extends FragmentPagerAdapter implements PagerSliding
 
         switch (position) {
             case 0:
-                return motherGuideFragment;
+                return new BabyNamesFragment();
 
             case 1:
-                return motherWeightFragment;
-            case 2:
-                return appointementsFragment;
-            case 3:
-                return toDoFragment;
+                return new BabyEvolutionFragment();
+
 
         }
 
@@ -54,7 +43,7 @@ public class MePagerAdapter extends FragmentPagerAdapter implements PagerSliding
 
     @Override
     public int getCount() {
-        return 4;
+        return 2;
     }
 
    /*@Override
@@ -83,5 +72,4 @@ public class MePagerAdapter extends FragmentPagerAdapter implements PagerSliding
     @Override
     public String changeSubtitle(int position) {
         return titres[position];
-    }
-}
+    }}

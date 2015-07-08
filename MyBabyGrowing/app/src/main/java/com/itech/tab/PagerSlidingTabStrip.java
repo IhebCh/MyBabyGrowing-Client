@@ -115,7 +115,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     private float rippleRoundedCornersDp;
     //~ Fields from MaterialRippleLayout
 
-
+    private boolean orientationRight = false;
 
     public PagerSlidingTabStrip(Context context) {
         this(context, null);
@@ -325,7 +325,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tab.setBackgroundDrawable(null);
         tab.setImageResource(resId);
 
-        tab.setPadding(0,10,0,10);
+        tab.setPadding(0, 10, 0, 10);
 
         addTab(position, tab);
 
@@ -338,16 +338,16 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             v.setPadding(mTabPadding, v.getPaddingTop(), mTabPadding, v.getPaddingBottom());
             ImageView tab_title = (ImageView) v.findViewById(R.id.psts_tab_title);
             if (tab_title != null) {
-              //  tab_title.setColor(mTabTextColor);
-               // tab_title.setTypeface(mTabTextTypeface, mTabTextTypefaceStyle);
-               // tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabTextSize);
+                //  tab_title.setColor(mTabTextColor);
+                // tab_title.setTypeface(mTabTextTypeface, mTabTextTypefaceStyle);
+                // tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabTextSize);
                 // setAllCaps() is only available from API 14, so the upper case is made manually if we are on a
                 // pre-ICS-build
                 if (isTabTextAllCaps) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                      //  tab_title.setAllCaps(true);
+                        //  tab_title.setAllCaps(true);
                     } else {
-                  //      tab_title.setText(tab_title.getText().toString().toUpperCase(getResources().getConfiguration().locale));
+                        //      tab_title.setText(tab_title.getText().toString().toUpperCase(getResources().getConfiguration().locale));
                     }
                 }
             }
@@ -392,6 +392,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         return new Pair<Float, Float>(lineLeft, lineRight);
     }
+
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -918,5 +919,18 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     public void setRippleRoundedCornersDp(float rippleRoundedCornersDp) {
         this.rippleRoundedCornersDp = rippleRoundedCornersDp;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if(l>oldl) orientationRight=true;
+        else orientationRight=false ;
+    }
+
+    public boolean isOrientedRight() {
+
+        return orientationRight;
+
     }
 }

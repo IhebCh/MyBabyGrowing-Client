@@ -23,4 +23,5 @@
         <item name="android:background">@color/pop_up_color</item>
 
     </style>
+
 </resources>

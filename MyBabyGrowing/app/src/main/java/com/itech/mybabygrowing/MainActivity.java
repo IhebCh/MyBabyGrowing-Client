@@ -1,6 +1,7 @@
 package com.itech.mybabygrowing;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -13,7 +14,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 
     private Toolbar toolbar;
-    private MeFragment meFragment = null;
+    private Fragment meFragment = null;
 
 
     @Override
@@ -78,10 +79,18 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-         meFragment = new MeFragment();
+
 
         switch (position) {
+            case 1:
+                meFragment = new BabyFragment();
+                Log.v("Fragment", position + "  --  " + fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, meFragment)
+                        .commit());
+
+                break;
             case 2:
+                meFragment = new MeFragment();
                 Log.v("Fragment", position + "  --  " + fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, meFragment)
                         .commit());

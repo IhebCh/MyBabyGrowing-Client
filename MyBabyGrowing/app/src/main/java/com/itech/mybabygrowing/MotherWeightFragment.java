@@ -1,16 +1,25 @@
 package com.itech.mybabygrowing;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.doomonafireball.betterpickers.datepicker.DatePickerBuilder;
+import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
+import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
+import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
+import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -29,7 +38,7 @@ import java.util.ArrayList;
  * Use the {@link MotherWeightFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MotherWeightFragment extends Fragment {
+public class MotherWeightFragment extends Fragment    implements DatePickerDialogFragment.DatePickerDialogHandler,NumberPickerDialogFragment.NumberPickerDialogHandler  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,11 +47,20 @@ public class MotherWeightFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private LinearLayout linearLayout;
 
     private LineChart mChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
+    private ViewGroup container;
+    private ViewGroup.LayoutParams layoutParams;
+    private TextView addPoids,addDate ;
+
+    public boolean isAddPoidsIsVisible() {
+        return addPoidsIsVisible;
+    }
+
+    private boolean addPoidsIsVisible;
 
 
     private void setData(int count, float range) {
@@ -118,10 +136,51 @@ public class MotherWeightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_mother_weight, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_mother_weight, container, false);
+        this.container = container;
+        linearLayout = (LinearLayout) view.findViewById(R.id.addPoids);
+        //   hideAddAppointments();
+        layoutParams = linearLayout.getLayoutParams() ;
+        //   linearLayout.animate().scaleY(0).alpha(1.0f).setDuration(5000);
+        addPoidsIsVisible = false;
+        linearLayout.setVisibility(View.GONE);
+
+        addPoids=(TextView)view.findViewById(R.id.poids);
+        addDate=(TextView)view.findViewById(R.id.date);
+        final Time time = new Time();
+        time.setToNow();
+
+        addPoids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NumberPickerBuilder npb = new NumberPickerBuilder()
+                        .setFragmentManager(getChildFragmentManager())
+                        .setStyleResId(R.style.BetterPickersDialogFragment)
+                        .setTargetFragment(MotherWeightFragment.this);
+
+                npb.show();
+
+            }
+        });
+
+        addDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerBuilder dpb = new DatePickerBuilder()
+                        .setFragmentManager(getChildFragmentManager())
+                        .setStyleResId(R.style.BetterPickersDialogFragment)
+                        .setTargetFragment(MotherWeightFragment.this);
+                dpb.setYear(time.year);
+                dpb.setMonthOfYear(time.month);
+                dpb.show();
+            }
+        });
+
          /*
                ************ Chart ***************
          */
+
         mChart = (LineChart) view.findViewById(R.id.chart1);
         // if enabled, the chart will always start at zero on the y-axis
         mChart.setStartAtZero(true);
@@ -187,6 +246,16 @@ public class MotherWeightFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDialogDateSet(int i, int i1, int i2, int i3) {
+        addDate.setText(i3+"/"+i2+"/"+i1);
+    }
+
+    @Override
+    public void onDialogNumberSet(int i, int i1, double v, boolean b, double v1) {
+        addPoids.setText(v1+" Kg");
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -202,4 +271,41 @@ public class MotherWeightFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    public void showAddPoids(AddFloatingActionButton addFloatingActionButton) {
+       /* ViewGroup.LayoutParams layoutParams = linearLayout.getLayoutParams();;
+        layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT ;
+        linearLayout.setLayoutParams(layoutParams);
+        */
+        linearLayout.animate().translationY(layoutParams.height)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        linearLayout.setVisibility(View.VISIBLE);
+                        //  linearLayout.setAlpha(1.0f);
+                        addPoidsIsVisible = true;
+
+                    }
+
+
+                });
+
+    }
+
+    public void hideAddPoids(AddFloatingActionButton addFloatingActionButton) {
+       /* ViewGroup.LayoutParams layoutParams = linearLayout.getLayoutParams();;
+        layoutParams.height = 0 ;
+        linearLayout.setLayoutParams(layoutParams);
+      */
+        linearLayout.animate().translationY(0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        linearLayout.setVisibility(View.GONE);
+                        addPoidsIsVisible = false;
+
+                    }
+                });
+    }
 }

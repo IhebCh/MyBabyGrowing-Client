@@ -15,5 +15,6 @@
 	
 	 <color name="psts_background_tab_pressed">#1AFFFFFF</color>
     <color name="psts_background_tab_pressed_ripple">#AAFFFFFF</color>
+    <color name="fab_ok">#00C853</color>
 
 </resources>
