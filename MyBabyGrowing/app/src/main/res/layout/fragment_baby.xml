@@ -27,7 +27,6 @@
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/tabs"
-
         android:layout_weight="1"
     >
 
@@ -44,5 +43,5 @@
         fab:fab_colorNormal="@color/accent_color"
         fab:fab_colorPressed="@color/pop_up_color"
         />
-        
+
 </RelativeLayout>
