@@ -37,9 +37,9 @@ public class MePagerAdapter extends FragmentPagerAdapter implements PagerSliding
     public Fragment getItem(int position) {
 
         switch (position) {
+
             case 0:
                 return motherGuideFragment;
-
             case 1:
                 return motherWeightFragment;
             case 2:
@@ -57,24 +57,7 @@ public class MePagerAdapter extends FragmentPagerAdapter implements PagerSliding
         return 4;
     }
 
-   /*@Override
-    public CharSequence getPageTitle(int position) {
-        Drawable drawable = context.getResources().getDrawable(R.drawable.guide_icon_info_grey);
-        drawable.setBounds(0,0,36,36);
-        ImageSpan imageSpan = new ImageSpan(drawable);
-        SpannableString spannableString = new SpannableString(" ");
-        spannableString.setSpan(imageSpan, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        return spannableString;
-    }
-*/
-
-    /*@Override
-    public CharSequence getPageTitle(int position) {
-
-        return " Tab   " + position;
-    }
-*/
     @Override
     public int getPageIconResId(int position) {
         return iconsId[position];

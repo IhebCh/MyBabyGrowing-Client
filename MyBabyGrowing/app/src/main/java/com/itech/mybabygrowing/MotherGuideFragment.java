@@ -83,10 +83,6 @@ public class MotherGuideFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
     }
 
     @Override
@@ -103,12 +99,16 @@ public class MotherGuideFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerOnTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position, RecyclerView recyclerView) {
+
                 Toast.makeText(getActivity(), "Onclick " + position + " sel " + recyclerViewSelectedItem, Toast.LENGTH_SHORT).show();
-              /*remove selection from previous item */
+
+            /*remove selection from previous item */
+
                 ((TextView) recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text)).setTextColor(getResources().getColor(R.color.primary_color_text));
                 recyclerView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(Color.TRANSPARENT);
 
             /*    switch (recyclerViewSelectedItem) {
+
                     case 0:
                         ((ImageView) (recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_icon))).setImageResource(R.drawable.today_btn);
                         break;
@@ -150,6 +150,8 @@ public class MotherGuideFragment extends Fragment {
                         break;
 
                 }*/
+
+
 //                recyclerView.getChildAt(recyclerViewSelectedItem).setBackgroundColor(Color.TRANSPARENT);
                 recyclerView.getChildAt(recyclerViewSelectedItem).findViewById(R.id.list_text);
 

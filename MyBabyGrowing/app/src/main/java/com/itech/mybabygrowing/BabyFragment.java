@@ -8,7 +8,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.itech.adapter.BabyPagerAdapter;
 import com.itech.tab.PagerSlidingTabStrip;
 
@@ -34,6 +37,8 @@ public class BabyFragment extends Fragment {
     private String mParam2;
     private BabyPagerAdapter babyPagerAdapter;
     private Activity activity;
+    private int currentPage;
+    private FloatingActionButton floatingActionButton;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -45,6 +50,7 @@ public class BabyFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment BabyFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static BabyFragment newInstance(String param1, String param2) {
         BabyFragment fragment = new BabyFragment();
@@ -74,6 +80,7 @@ public class BabyFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_baby, container, false);
         // Inflate the layout for this fragment
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
 
         pagerSlidingTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
 
@@ -88,13 +95,36 @@ public class BabyFragment extends Fragment {
         pagerSlidingTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (!pagerSlidingTabStrip.isOrientedRight() && position != 0)
+                    positionOffset = 1 - positionOffset;
+                if (positionOffset > 0.5) positionOffset = 1 - positionOffset;
 
+                floatingActionButton.setScaleX(1 - positionOffset * 2);
+
+                floatingActionButton.setScaleY(1 - positionOffset * 2);
+                //  if (positionOffset >0.5) positionOffset=1-positionOffset ;
+                //    floatingActionButton.setAlpha(1 - positionOffset*2 );
             }
 
             @Override
             public void onPageSelected(int position) {
-                ((ActionBarActivity)activity).getSupportActionBar().setSubtitle(babyPagerAdapter.changeSubtitle(position));
+                ((ActionBarActivity) activity).getSupportActionBar().setSubtitle(babyPagerAdapter.changeSubtitle(position));
 
+                currentPage = position;
+
+                switch (position) {
+                    case 0:
+                        if (((BabyNamesFragment) babyPagerAdapter.getItem(currentPage)).isBoysList()) {
+                            floatingActionButton.setIconDrawable(getResources().getDrawable(R.drawable.male));
+                        } else {
+                            floatingActionButton.setIconDrawable(getResources().getDrawable(R.drawable.female));
+                        }
+                        break;
+
+                    case 1:
+                        floatingActionButton.setIcon(android.R.color.transparent);
+                        break;
+                }
             }
 
             @Override
@@ -102,33 +132,38 @@ public class BabyFragment extends Fragment {
 
             }
         });
-        /*viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
+        ((ActionBarActivity) activity).getSupportActionBar().setSubtitle(babyPagerAdapter.changeSubtitle(0));
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        floatingActionButton.setAnimation(scaleAnimation);
+        scaleAnimation.setDuration(300);
+        scaleAnimation.start();
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageSelected(int position) {
-                //    pagerSlidingTabStrip.update
-                //    pagerSlidingTabStrip.setSelectedNavigationItem(position);
+            public void onClick(View v) {
+                switch (currentPage) {
+                    case 0:
+                        if (((BabyNamesFragment) babyPagerAdapter.getItem(currentPage)).isBoysList())
+                            ((BabyNamesFragment) babyPagerAdapter.getItem(currentPage)).showGirlsList(floatingActionButton);
+                        else
+                            ((BabyNamesFragment) babyPagerAdapter.getItem(currentPage)).showBoysList(floatingActionButton);
+
+                        break;
+                    case 1:
+
+                        break;
+                }
             }
         });
-
-       /* for (int i = 0; i < babyPagerAdapter.getCount(); i++) {
-            pagerSlidingTabStrip.addTab(
-                    pagerSlidingTabStrip.newTab()
-                            .setIcon(getResources().getDrawable(R.drawable.baby_btn))
-                            .setTabListener(this)
-            );
-        }*/
-        ((ActionBarActivity)activity).getSupportActionBar().setSubtitle(babyPagerAdapter.changeSubtitle(0));
-
         return view;
     }
-
 
     @Override
     public void onAttach(Activity activity) {
 
-
-        this.activity=activity ;
-        ((ActionBarActivity)activity).getSupportActionBar().setTitle("Moi");
+        this.activity = activity;
+        ((ActionBarActivity) activity).getSupportActionBar().setTitle("Bébé");
 
         super.onAttach(activity);
     }
@@ -149,7 +184,7 @@ public class BabyFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
 
-    public interface TabChangeTitleListener{
+    public interface TabChangeTitleListener {
 
         public String changeSubtitle(int position);
     }

@@ -62,8 +62,6 @@ public class ToDoFragment extends Fragment implements DatePickerDialogFragment.D
     private TextView addDate, addHeure;
     private EditText commentaire;
 
-    //   private OnFragmentInteractionListener mListener;
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -227,9 +225,8 @@ public class ToDoFragment extends Fragment implements DatePickerDialogFragment.D
         public void onFragmentInteraction(Uri uri);
     }
 
-
-
     public void addToDo() {
+
         ToDo toDo = new ToDo(addDate.getText().toString(), commentaire.getText().toString(), false);
 
         recyclerViewToDoAdapter.add(toDo);

@@ -44,7 +44,6 @@ public class RecyclerViewAppointementAdapter extends RecyclerView.Adapter<Recycl
 
     }
 
-
     @Override
     public int getItemCount() {
         return data.size();
@@ -74,7 +73,6 @@ public class RecyclerViewAppointementAdapter extends RecyclerView.Adapter<Recycl
         public void setHeure(TextView heure) {
             this.heure = heure;
         }
-
 
         public ImageView getIcon() {
             return icon;

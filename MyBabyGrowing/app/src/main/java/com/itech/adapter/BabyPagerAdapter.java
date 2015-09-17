@@ -19,7 +19,8 @@ public class BabyPagerAdapter extends FragmentPagerAdapter implements PagerSlidi
     private Context context;
     private int[] iconsId = {R.drawable.babynames_icon_new, R.drawable.weekly_icon};
     private String[] titres = {"Nom de bébé", "Evolution du bébé"};
-
+    BabyNamesFragment babyNamesFragment = new BabyNamesFragment() ;
+    BabyEvolutionFragment babyEvolutionFragment = new BabyEvolutionFragment();
     public BabyPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
@@ -29,12 +30,12 @@ public class BabyPagerAdapter extends FragmentPagerAdapter implements PagerSlidi
     public Fragment getItem(int position) {
 
         switch (position) {
+
             case 0:
-                return new BabyNamesFragment();
+                return babyNamesFragment;
 
             case 1:
-                return new BabyEvolutionFragment();
-
+                return babyEvolutionFragment;
 
         }
 

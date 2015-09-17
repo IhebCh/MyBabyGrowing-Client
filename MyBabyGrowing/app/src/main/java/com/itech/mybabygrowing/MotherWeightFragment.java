@@ -226,12 +226,9 @@ public class MotherWeightFragment extends Fragment    implements DatePickerDialo
         setData(36, 100);
         mChart.animateXY(2000, 2000);
 
-
         return  view ;
 
-
     }
-
 
 
     @Override
